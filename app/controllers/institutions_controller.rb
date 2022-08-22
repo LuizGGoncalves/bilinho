@@ -4,26 +4,15 @@ class InstitutionsController < ApplicationController
   before_action :check_institutions, only: %i[link_user_to_institutions self_info_update]
   before_action :check_admin, only: %i[destroy create edit update]
 
- def link_user_to_institutions
-   @user = current_user
-   @institution = Institution.find(params[:id])
-   @institution.user_id = @user.id
-   if @institution.save 
-    render json: @institution, status: 200
-   else
-    render json: @institution.errors, status: 400
-   end
- end
+  def link_user_to_institutions
+    response = UserLinkInstitution.call(current_user, params[:id])
+    render json: response[:body], status: response[:status]
+  end
 
- def self_info_update 
-   @institution = current_user.institution
-   if @institution == nil then return render json: {errors: "Usuario nao vinculado!"} end
-   if @institution.update(user_insttitution_params)
-     render json: @institution, status: 200
-   else
-     render json: @institution.errors, status: 400
-   end
- end
+  def self_info_update
+    response = UserUpdateInstitution.call(current_user)
+    render json: response[:body], status: response[:status]
+  end
 
   def index
     @institutions = Institution.all
@@ -48,8 +37,7 @@ class InstitutionsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @institution.update(institution_params)
@@ -61,9 +49,9 @@ class InstitutionsController < ApplicationController
 
   def destroy
     if @institution.destroy
-      render json: @institution, status:202
+      render json: @institution, status: 202
     else
-      render json: {errors: "nao foi possivel deletar a instituiçao"}, status:400
+      render json: { errors: 'nao foi possivel deletar a instituiçao' }, status: 400
     end
   end
 
