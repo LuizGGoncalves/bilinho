@@ -1,7 +1,7 @@
 class UserLinkInstitution < ApplicationService
   def initialize(user, inst_id)
     @user = user
-    @ints_id = inst_id
+    @inst_id = inst_id
   end
 
   def call
