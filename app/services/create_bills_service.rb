@@ -1,4 +1,4 @@
-class CreateBills < ApplicationService
+class CreateBillsService < ApplicationService
   def initialize(registration)
     @registration = registration
   end

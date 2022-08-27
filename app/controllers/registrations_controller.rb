@@ -32,7 +32,7 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new(registration_params)
 
     if @registration.save
-      CreateBills.call(@registration)
+      CreateBillsService.call(@registration)
       render json: @registration, status: :created
     else
       render json: @registration.errors, status: 400
