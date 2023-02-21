@@ -12,7 +12,7 @@ jobs:
           POSTGRES_DB: myapp_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_HOST: db
+          POSTGRES_HOST: localhost
         image: postgres
         ports:
           - 5432:5432
