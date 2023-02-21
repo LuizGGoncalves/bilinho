@@ -6,14 +6,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    service:
+    services:
       postgres:
         env:
           POSTGRES_DB: myapp_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         image: postgres
-        port:
+        ports:
           - 5432:5432
         options: >-
           --health-interval 10s
