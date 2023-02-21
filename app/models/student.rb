@@ -15,4 +15,10 @@ class Student < ApplicationRecord
     errors.add(:user_id, "Usuario já foi atribuido a uma universidade") unless
      User.find(user_id).institution == nil
   end
+
+  def change_user_id(user)
+    @user = user
+    update!(user_id: @user.id)
+    @user.update!(user_type: "Student")
+  end
 end
