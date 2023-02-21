@@ -10,7 +10,7 @@ jobs:
       POSTGRES_HOST: postgres
 
     services:
-      postgres:
+      db:
         env:
           POSTGRES_DB: myapp_test
           POSTGRES_USER: postgres
