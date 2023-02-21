@@ -10,8 +10,7 @@ RSpec.describe CreateBillsService, type: :model do
          student_id: student.id,
          valor_total: 500,
          quantidade_faturas: 5,
-         vencimento: 15,
-    )
+         vencimento: 15,)
     expect(Registration.find(registration.id).bills.size).to eq(5)
   end
 end

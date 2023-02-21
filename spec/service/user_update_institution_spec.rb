@@ -6,7 +6,7 @@ RSpec.describe UserUpdateInstitution, type: :model do
     @institution = create(:institution)
     @institution.change_user_id(@user)
     institutions_params = {
-      nome: 'alterado'
+      nome: 'alterado',
     }
     response = UserUpdateInstitution.call(@user, institutions_params)
     expect(response[:body].nome).to eq('alterado')
@@ -17,7 +17,7 @@ RSpec.describe UserUpdateInstitution, type: :model do
     @institution = create(:institution)
     @institution.change_user_id(@user)
     institutions_params = {
-      id: 25
+      id: 25,
     }
     response = UserUpdateInstitution.call(@user, institutions_params)
     expect(response[:body].id).to eq(25)
@@ -26,7 +26,7 @@ RSpec.describe UserUpdateInstitution, type: :model do
   it 'Institution not linked' do
     @user = create(:user, :institution_user)
     institutions_params = {
-      name: 'alterado'
+      name: 'alterado',
     }
     response = UserUpdateInstitution.call(@user, institutions_params)
     expect(response[:body][:errors]).to eq('Institutiçao nao vinculado!')

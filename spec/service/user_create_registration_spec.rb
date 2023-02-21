@@ -10,7 +10,7 @@ RSpec.describe UserCreateRegistration, type: :model do
       valor_total: 500,
       quantidade_faturas: 5,
       vencimento: 20,
-      nome_curso: 'TesteCurso'
+      nome_curso: 'TesteCurso',
     }
     response = UserCreateRegistration.call(user, params, institution.id)
     expect(response[:body].valor_total).to eq(500)
@@ -25,10 +25,10 @@ RSpec.describe UserCreateRegistration, type: :model do
     student = create(:student)
     student.change_user_id(user)
     params = {
-        valor_total: "string",
-        quantidade_faturas: 50.6,
-        vencimento: 50,
-        nome_curso: 225
+      valor_total: "string",
+      quantidade_faturas: 50.6,
+      vencimento: 50,
+      nome_curso: 225,
     }
     response = UserCreateRegistration.call(user, params, institution.id)
     expect(response[:status]).to eq(400)

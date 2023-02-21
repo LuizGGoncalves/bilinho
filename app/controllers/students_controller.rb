@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: %i[show edit update destroy]
-  before_action :check_user, only: %i[register_update_student_info]
-  before_action :check_admin, only: %i[destroy index show create update]
+  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :check_user, only: [:register_update_student_info]
+  before_action :check_admin, only: [:destroy, :index, :show, :create, :update]
 
   def register_update_student_info
     response = UserCreateUpdateStudent.call(current_user, student_params)

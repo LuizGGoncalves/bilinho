@@ -1,0 +1,45 @@
+name: Bilinho Ci
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+      DB_HOST: localhost
+
+    services:
+      postgres:
+        env:
+          POSTGRES_DB: myapp_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        image: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 3.0
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.5
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+    - name: Run rubocop
+      run: |
+        bundle exec rubocop
+    - name: Run tests
+      run: |
+        bundle exec rake db:create
+        bundle exec rake db:migrate RAILS_ENV=test
+        bundle exec rspec --fail-fast

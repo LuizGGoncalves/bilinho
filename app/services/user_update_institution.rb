@@ -1,5 +1,5 @@
 class UserUpdateInstitution < ApplicationService
-  def initialize(user,user_institution_params)
+  def initialize(user, user_institution_params)
     @user = user
     @user_institution_params = user_institution_params
   end

@@ -1,8 +1,8 @@
 class InstitutionsController < ApplicationController
-  before_action :set_institution, only: %i[show edit update destroy]
-  before_action :check_sing_in, only: %i[index show]
-  before_action :check_institutions, only: %i[link_user_to_institutions self_info_update]
-  before_action :check_admin, only: %i[destroy create edit update]
+  before_action :set_institution, only: [:show, :edit, :update, :destroy]
+  before_action :check_sing_in, only: [:index, :show]
+  before_action :check_institutions, only: [:link_user_to_institutions, :self_info_update]
+  before_action :check_admin, only: [:destroy, :create, :edit, :update]
 
   def link_user_to_institutions
     response = UserLinkInstitution.call(current_user, params[:id])
