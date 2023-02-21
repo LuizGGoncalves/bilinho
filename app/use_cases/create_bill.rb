@@ -1,5 +1,6 @@
 class CreateBill
-  include useCase
+  include UseCase
+
   def initialize(registration)
     @registration = registration
   end
