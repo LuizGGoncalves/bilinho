@@ -6,6 +6,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    service:
+      postgres:
+        env:
+          POSTGRES_DB: myapp_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        image: postgres
+        port:
+          - 5432:5432
+        options: >-
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 3.0
