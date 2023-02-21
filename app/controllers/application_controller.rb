@@ -37,6 +37,6 @@ class ApplicationController < ActionController::Base
     authenticate_user!
     @user = current_user
     return render json: { errors: "Nao possui permissao" } unless
-    @user.roles.any? { |role| ["ADMIN"].include?(role) } 
+    @user.roles.any? { |role| ["ADMIN"].include?(role) }
   end
 end

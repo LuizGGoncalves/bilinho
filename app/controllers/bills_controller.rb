@@ -3,29 +3,12 @@ class BillsController < ApplicationController
   before_action :check_sing_in, only: %i[show_user_bill]
   before_action :check_admin, only: %i[index show create destroy update]
 
-  def show_user_bill 
-    @user = current_user
-    if @user.user_type == "Student"
-      if @user.student == nil then render json: {errors: "Usuario nao vinculado!"} end
-      registrations = @user.student.registrations
-      bills = {}
-      registrations.each do |registration|
-        bills[registration.id] = registration.bills
-      end
-      return render json: bills
-    end
-    if @user.user_type == 'Institution'
-      if @user.institution == nil then render json: {errors: "Usuario nao vinculado!"} end
-      registrations = @user.institution.registrations
-      bills = {}
-      registrations.each do |registration|
-        bills[registration.id] = registration.bills
-      end
-      return render json: bills
-    end
+  def show_user_bill
+    response = UserGetBills.call(current_user)
+    render json: response[:body], status: response[:status]
   end
 
-  def index 
+  def index
     @bills = Bill.all
     render json: @bills
   end
@@ -38,7 +21,7 @@ class BillsController < ApplicationController
     @bill = Bill.new
   end
 
-  def create 
+  def create
     @bill = Bill.new(bill_params)
     if @bill.save
       render json: @bill, status: 202
@@ -47,10 +30,10 @@ class BillsController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
   end
 
-  def update 
+  def update
     if @bill.update(bill_params)
       render json: @bill, status: 200
     else
