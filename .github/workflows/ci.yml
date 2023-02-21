@@ -7,10 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      POSTGRES_HOST: postgres
+      RAILS_ENV: test
+      DB_HOST: localhost
 
     services:
-      db:
+      postgres:
         env:
           POSTGRES_DB: myapp_test
           POSTGRES_USER: postgres
