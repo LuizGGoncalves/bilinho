@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      POSTGRES_HOST: localhost
+      POSTGRES_HOST: postgres
 
     services:
       postgres:
