@@ -1,0 +1,32 @@
+name: Bilinho Ci
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 3.0
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.5
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+    - name: Run tests
+      run: |
+        bundle exec rake db:create db:migrate RAILS_ENV=test
+        bundle exec rspec
+    - name: Check test coverage
+      env:
+        CI: true
+      run: |
+        bundle exec rspec --format documentation --require spec_helper
+        bundle exec codeclimate-test-reporter
+    - name: Upload coverage to Code Climate
+      uses: codecov/codecov-action@v2.1.1
+      with:
+        name: codeclimate
