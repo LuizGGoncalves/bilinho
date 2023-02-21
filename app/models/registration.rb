@@ -12,4 +12,6 @@ class Registration < ApplicationRecord
   validate -> {errors.add(:valor_total, "O valor do curso deve ser maior que 0"  ) unless valor_total > 0}
   validate -> {errors.add(:quantidade_faturas, "O numero de fatura deve ser maior que 0") unless quantidade_faturas > 0}
   validate -> {errors.add(:vencimento, "Data invalida ") unless vencimento > 0 && vencimento <= 31}
+  after_save -> { CreateBillsService.call(self) }
+
 end
