@@ -11,13 +11,13 @@ class UserGetRegistrations < ApplicationService
 
   def user_registrations
     if @user.user_type == 'Student'
-      return { errors: 'Usuario nao vinculado!' } if @user.student.nil?
+      return { body: { errors: 'Usuario nao vinculado a um estudante!' }, status: 400 } if @user.student.nil?
 
       registrations = @user.student.registrations
       return { body: registrations, status: 200 }
     end
     if @user.user_type == 'Institution'
-      return { errors: 'Usuario nao vinculado!' } if @user.institution.nil?
+      return { body: { errors: 'Usuario nao vinculado a uma instituiçao!' }, status: 400 } if @user.institution.nil?
 
       registrations = @user.institution.registrations
       { body: registrations, status: 200 }

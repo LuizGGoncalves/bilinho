@@ -8,7 +8,7 @@ class BillsController < ApplicationController
     render json: response[:body], status: response[:status]
   end
 
-  def index 
+  def index
     @bills = Bill.all
     render json: @bills
   end
@@ -21,7 +21,7 @@ class BillsController < ApplicationController
     @bill = Bill.new
   end
 
-  def create 
+  def create
     @bill = Bill.new(bill_params)
     if @bill.save
       render json: @bill, status: 202
@@ -30,10 +30,10 @@ class BillsController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
   end
 
-  def update 
+  def update
     if @bill.update(bill_params)
       render json: @bill, status: 200
     else

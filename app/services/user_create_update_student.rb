@@ -15,14 +15,14 @@ class UserCreateUpdateStudent < ApplicationService
       @student = Student.new(@student_params)
       @student.user_id = @user.id
       if @student.save
-        return {body: @student, status: :created}
+        return {body: @student, status: 200}
       else
         return {body: @student.errors, status: 400}
       end
     else
       @student = @user.student
       if @student.update(@student_params)
-        return {body: @student, status: 202}
+        return {body: @student, status: 200}
       else
         return {body: @student.errors, status: 400}
       end

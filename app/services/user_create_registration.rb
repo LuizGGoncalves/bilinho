@@ -17,7 +17,7 @@ class UserCreateRegistration < ApplicationService
     @registration.institution_id = @inst_id
     if @registration.save
       CreateBillsService.call(@registration)
-      { body: @registration, status: :created }
+      { body: @registration, status: 201 }
     else
       { body: @registration.errors, status: 400 }
     end

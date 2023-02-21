@@ -21,7 +21,7 @@ class UserGetInfo < ApplicationService
     if @user.user_type == 'Institution'
       @institution = @user.institution
       if @institution.nil?
-        { body: { errors: 'Informaçoes do estudante nao cadastradas' }, status: 400 }
+        { body: { errors: 'Informaçoes da instituiçao nao vinculada' }, status: 400 }
       else
         { body: @institution, status: 200 }
       end

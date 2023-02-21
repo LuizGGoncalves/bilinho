@@ -1,6 +1,7 @@
 class UserUpdateInstitution < ApplicationService
-  def initialize(user)
+  def initialize(user,user_institution_params)
     @user = user
+    @user_institution_params = user_institution_params
   end
 
   def call
@@ -11,9 +12,9 @@ class UserUpdateInstitution < ApplicationService
 
   def self_info_update
     @institution = @user.institution
-    return { body: { errors: 'Usuario nao vinculado!' }, status: 400 } if @institution.nil?
+    return { body: { errors: 'Institutiçao nao vinculado!' }, status: 400 } if @institution.nil?
 
-    if @institution.update(user_insttitution_params)
+    if @institution.update(@user_institution_params)
       { body: @institution, status: 200 }
     else
       { body: @institution.errors, status: 400 }
