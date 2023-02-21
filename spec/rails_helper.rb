@@ -10,6 +10,13 @@ SimpleCov.start do
   add_group 'Helpers', 'app/helpers'
   add_group 'Mailers', 'app/mailers'
   add_group 'Service', 'app/services'
+
+  minimum_coverage 80
+
+  add_group "Uncovered" do |file|
+    if file.covered_percentage < 80
+      puts "#{file.filename} Nao atendeu ao limite de cobertura de teste #{cobertura: file.covered_percent}"
+  end
 end
 
 require 'spec_helper'

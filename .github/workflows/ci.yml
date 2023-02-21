@@ -35,19 +35,11 @@ jobs:
       run: |
         gem install bundler
         bundle install
+    - name: Run rubocop
+      run: |
+        bundle exec rubocop
     - name: Run tests
       run: |
         bundle exec rake db:create
         bundle exec rake db:migrate RAILS_ENV=test
         bundle exec rspec --fail-fast
-    - name: Check test coverage
-      env:
-        CI: true
-      run: |
-        bundle exec rspec --format documentation --require spec_helper
-        bundle exec codeclimate-test-reporter
-    - name: Upload coverage to Code Climate
-      uses: codecov/codecov-action@v3
-      with:
-        name: codeclimate
-        verbose: true
