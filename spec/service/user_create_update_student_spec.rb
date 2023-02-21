@@ -9,7 +9,7 @@ RSpec.describe UserCreateUpdateStudent, type: :model do
       data_nascimento: '1981-11-12',
       telefone: 11_111_111,
       genero: 'm',
-      meio_pagamento: 'cartao'
+      meio_pagamento: 'cartao',
     }
     response = UserCreateUpdateStudent.call(user, params)
 
@@ -29,7 +29,7 @@ RSpec.describe UserCreateUpdateStudent, type: :model do
       data_nascimento: '1981-11-126',
       telefone: 'sting',
       genero: 'P',
-      meio_pagamento: 'carne'
+      meio_pagamento: 'carne',
     }
     response = UserCreateUpdateStudent.call(user, params)
     expect(response[:status]).to eq(400)

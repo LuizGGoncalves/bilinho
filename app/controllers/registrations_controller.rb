@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
-  before_action :set_registration, only: %i[show edit update destroy]
-  before_action :check_user, only: %i[user_create_registration]
-  before_action :check_admin, only: %i[index show create destroy update]
+  before_action :set_registration, only: [:show, :edit, :update, :destroy]
+  before_action :check_user, only: [:user_create_registration]
+  before_action :check_admin, only: [:index, :show, :create, :destroy, :update]
 
   def user_create_registration
     response = UserCreateRegistration.call(current_user, registration_params, params[:instId])

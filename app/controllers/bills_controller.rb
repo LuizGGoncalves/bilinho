@@ -1,7 +1,7 @@
 class BillsController < ApplicationController
-  before_action :set_bill, only: %i[show edit update destroy]
-  before_action :check_sing_in, only: %i[show_user_bill]
-  before_action :check_admin, only: %i[index show create destroy update]
+  before_action :set_bill, only: [:show, :edit, :update, :destroy]
+  before_action :check_sing_in, only: [:show_user_bill]
+  before_action :check_admin, only: [:index, :show, :create, :destroy, :update]
 
   def show_user_bill
     response = UserGetBills.call(current_user)
@@ -43,9 +43,9 @@ class BillsController < ApplicationController
 
   def destroy
     if @Bill.destroy
-      render json: @Bill, status:202
+      render json: @Bill, status: 202
     else
-      render json: {errors: "nao foi possivel deletar a mensalidade"}, status:400
+      render json: { errors: "nao foi possivel deletar a mensalidade" }, status: 400
     end
   end
 
@@ -55,7 +55,7 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
   end
 
-  def bill_params 
+  def bill_params
     params.permit(:valor_fatura, :data_vencimento, :registration_id, :status)
   end
 end

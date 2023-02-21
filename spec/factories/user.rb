@@ -5,12 +5,12 @@ FactoryBot.define do
     password_confirmation { '123456789' }
   end
 
-  trait :institution_user do 
-    user_type { 'Institution'}
-    roles { ["INSTITUTION"]}
+  trait :institution_user do
+    user_type { 'Institution' }
+    roles { ["INSTITUTION"] }
   end
 
-  trait :admin do 
-    roles { ["ADMIN"]}
+  trait :admin do
+    roles { ["ADMIN"] }
   end
 end
