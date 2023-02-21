@@ -35,6 +35,7 @@ group :development do
 end
 
 group :test do
+  gem "codeclimate-test-reporter"
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
