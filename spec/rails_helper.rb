@@ -3,14 +3,12 @@ require 'simplecov'
 require 'devise_token_auth'
 
 SimpleCov.start 'rails' do
-
   add_filter '/test/'
   add_filter '/config/'
   add_filter '/vendor/'
   add_filter '/channels/'
   add_filter '/jobs/'
   add_filter '/mailers/'
-
 
   add_group 'Controllers', 'app/controllers'
   add_group 'Models', 'app/models'
@@ -92,10 +90,10 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  RSpec.configure do |config|
-    config.include Devise::Test::ControllerHelpers, type: :controller
+  RSpec.configure do |conf|
+    conf.include Devise::Test::ControllerHelpers, type: :controller
 
-    config.before(:each, type: :controller) do
+    conf.before(:each, type: :controller) do
       @request.env['devise.mapping'] = Devise.mappings[:user]
     end
   end

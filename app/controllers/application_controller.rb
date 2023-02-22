@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_sing_in
-    if user_signed_in? == false then return render json: { errors: "Realizar login" }, status:400 end
+    if user_signed_in? == false then return render json: { errors: "Realizar login" }, status: 400 end
     authenticate_user!
     @user = current_user
     return render json: { errors: "Nao possui permissao" } unless

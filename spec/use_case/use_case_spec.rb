@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UseCase do
-
   describe ".perform" do
     class Dummy
       include UseCase
@@ -13,7 +12,7 @@ RSpec.describe UseCase do
     context "when peform is implemented" do
       it "include UseCase, generate a new instance with arguments and perform it" do
         args = { teste: "laranja" }
-        use_case = instance_double(Dummy, perform:true)
+        use_case = instance_double(Dummy, perform: true)
         allow(Dummy).to receive(:new).with(args).and_return(use_case)
 
         expect(Dummy.perform(args)).to be_truthy
@@ -29,5 +28,4 @@ RSpec.describe UseCase do
       end
     end
   end
-
 end
