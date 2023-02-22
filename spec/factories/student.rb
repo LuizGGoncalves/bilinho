@@ -6,5 +6,6 @@ FactoryBot.define do
     telefone { 11_111_111 }
     genero { 'm' }
     meio_pagamento { 'cartao' }
+    user { create(:user) }
   end
 end

@@ -20,6 +20,7 @@ class User < ApplicationRecord
   before_create :set_user_role
 
   def set_user_role
+    return if self.roles.any? { |role| ["ADMIN"].include?(role) }
     if user_type.downcase == "student" then self.roles = ["STUDENT"] end
     if user_type.downcase == "institution" then self.roles = ["INSTITUTION"] end
   end
