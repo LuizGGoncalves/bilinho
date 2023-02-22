@@ -1,6 +1,7 @@
 class Student < ApplicationRecord
   require "cpf_cnpj"
   has_many :registrations, dependent: :delete_all
+  belongs_to :user
 
   validates :nome, presence: true, uniqueness: { message: "Nome Já Utilizado" }
   validates :cpf, presence: true, uniqueness: { message: "Cpf Já Utilizado" }

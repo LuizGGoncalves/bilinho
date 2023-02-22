@@ -1,8 +1,10 @@
 FactoryBot.define do
   factory :user do
-    email { 'user@example.com' }
+    email { Faker::Internet.email }
     password { '123456789' }
     password_confirmation { '123456789' }
+    user_type { 'Student' }
+    roles { [ 'STUDENT' ]}
   end
 
   trait :institution_user do

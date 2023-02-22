@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
   end
 
   def check_sing_in
-    if user_signed_in? == false then return render json: { errors: "Realizar login" } end
+    if user_signed_in? == false then return render json: { errors: "Realizar login" }, status:400 end
     authenticate_user!
     @user = current_user
     return render json: { errors: "Nao possui permissao" } unless
-    @user.roles.any? { |role| ["USER", "ADMIN", "INSTITUTION"].include?(role) }
+    @user.roles.any? { |role| ["STUDENT", "ADMIN", "INSTITUTION"].include?(role) }
   end
 
   def check_user
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     authenticate_user!
     @user = current_user
     return render json: { errors: "Nao possui permissao" } unless
-    @user.roles.any? { |role| ["USER", "ADMIN"].include?(role) }
+    @user.roles.any? { |role| ["STUDENT", "ADMIN"].include?(role) }
   end
 
   def check_institutions

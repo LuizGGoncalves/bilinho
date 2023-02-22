@@ -1,6 +1,7 @@
 class Institution < ApplicationRecord
   require "cpf_cnpj"
   has_many :registrations, dependent: :delete_all
+  has_many :user
 
   validates :nome, presence: true, uniqueness: { message: "Nome já utilizado" }
   validates :cnpj, presence: true, uniqueness: { message: "Cnpj já utilizado" }
