@@ -3,16 +3,14 @@ require 'rails_helper'
 RSpec.describe UserGetInfo, type: :model do
   it 'get student information' do
     @user = create(:user)
-    @student = create(:student)
-    @student.change_user_id(@user)
+    @student = create(:student, user: @user)
     response = UserGetInfo.call(@user)
     expect(response[:body]).to eq(@student)
     expect(response[:status]).to eq(200)
   end
   it 'get institution information' do
-    @user = create(:user)
-    @institution = create(:institution)
-    @institution.change_user_id(@user)
+    @user = create(:user, :institution_user)
+    @institution = create(:institution, users: [@user])
     response = UserGetInfo.call(@user)
     expect(response[:body]).to eq(@institution)
     expect(response[:status]).to eq(200)

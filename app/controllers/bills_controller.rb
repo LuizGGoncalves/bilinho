@@ -14,23 +14,16 @@ class BillsController < ApplicationController
   end
 
   def show
-    render json: @bills
-  end
-
-  def new
-    @bill = Bill.new
+    render json: @bill
   end
 
   def create
     @bill = Bill.new(bill_params)
     if @bill.save
-      render json: @bill, status: 202
+      render json: @bill, status: 201
     else
       render json: @bill.errors, status: 400
     end
-  end
-
-  def edit
   end
 
   def update
@@ -42,9 +35,10 @@ class BillsController < ApplicationController
   end
 
   def destroy
-    if @Bill.destroy
-      render json: @Bill, status: 202
-    else
+    begin
+      @bill.destroy
+      render json: @Bill, status: 200
+    rescue
       render json: { errors: "nao foi possivel deletar a mensalidade" }, status: 400
     end
   end

@@ -10,8 +10,9 @@ class User < ApplicationRecord
           :confirmable
   include DeviseTokenAuth::Concerns::User
 
-  has_one :student
-  has_one :institution
+  has_one :user_association, class_name: "Association"
+  has_one :institution, through: :user_association, source: :associationable, source_type: 'Institution'
+  has_one :student, through: :user_association, source: :associationable, source_type: 'Student'
 
   validates :user_type, presence: true
   validate -> { errors.add(:user_type, "Tipo nao valido") unless ["Student", "Institution"].include?(user_type) }

@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
 
       it 'Should return user info in JSON format' do
         expect(response.content_type).to eq 'application/json; charset=utf-8'
-        expect(JSON.parse(response.body)["nome"]).to eq('testeStudent')
+        expect(JSON.parse(response.body)["nome"]).to eq(student.nome)
       end
     end
 
@@ -27,8 +27,8 @@ RSpec.describe UsersController, type: :controller do
         get :self_info
       end
 
-      it "returs not autorized" do
-        expect(response.status).to eq 400
+      it "returns not autorized" do
+        expect(response.status).to eq 401
       end
     end
   end

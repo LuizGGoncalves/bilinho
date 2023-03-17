@@ -13,7 +13,7 @@ class UserCreateUpdateStudent < ApplicationService
   def register_update_student_info
     if @user.student.nil?
       @student = Student.new(@student_params)
-      @student.user_id = @user.id
+      @student.user = @user
       if @student.save
         return { body: @student, status: 200 }
       else

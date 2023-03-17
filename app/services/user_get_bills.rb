@@ -14,9 +14,9 @@ class UserGetBills < ApplicationService
       return { body: { errors: 'Usuario nao vinculado!' }, status: 400 } if @user.student.nil?
 
       registrations = @user.student.registrations
-      bills = {}
+      bills = []
       registrations.each do |registration|
-        bills[registration.id] = registration.bills
+        bills.concat(registration.bills)
       end
       return { body: bills, status: 200 }
     end
@@ -24,9 +24,9 @@ class UserGetBills < ApplicationService
       return { body: { errors: 'Usuario nao vinculado!' }, status: 400 } if @user.institution.nil?
 
       registrations = @user.institution.registrations
-      bills = {}
+      bills = []
       registrations.each do |registration|
-        bills[registration.id] = registration.bills
+        bills.concat(registration.bills)
       end
       return { body: bills, status: 200 }
     end

@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_13_172911) do
+ActiveRecord::Schema.define(version: 2023_03_02_170300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "associations", force: :cascade do |t|
+    t.string "user_type", null: false
+    t.bigint "user_id", null: false
+    t.string "associationable_type", null: false
+    t.bigint "associationable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["associationable_type", "associationable_id"], name: "index_assoc_on_type_and_id"
+    t.index ["user_type", "user_id"], name: "index_associations_on_user_type_and_user_id"
+  end
 
   create_table "bills", force: :cascade do |t|
     t.float "valor_fatura", null: false

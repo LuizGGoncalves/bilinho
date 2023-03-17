@@ -4,8 +4,7 @@ RSpec.describe UserCreateRegistration, type: :model do
   it 'User create registration' do
     user = create(:user)
     institution = create(:institution)
-    student = create(:student)
-    student.change_user_id(user)
+    student = create(:student, user: user)
     params = {
       valor_total: 500,
       quantidade_faturas: 5,
@@ -22,8 +21,7 @@ RSpec.describe UserCreateRegistration, type: :model do
   it 'Not valid registration parameters' do
     user = create(:user)
     institution = create(:institution)
-    student = create(:student)
-    student.change_user_id(user)
+    student = create(:student, user: user)
     params = {
       valor_total: "string",
       quantidade_faturas: 50.6,

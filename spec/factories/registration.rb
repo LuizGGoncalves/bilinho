@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :registration do
-    valor_total { 1000 }
-    quantidade_faturas { 10 }
+    valor_total { 1200 }
+    quantidade_faturas { 3 }
     vencimento { 15 }
     nome_curso { "testeCurso" }
-    institution_id { 1 }
-    student_id { 1 }
+    institution { create (:institution) }
+    student { create (:student) }
   end
 end

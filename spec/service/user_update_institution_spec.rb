@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe UserUpdateInstitution, type: :model do
   it 'update institution name' do
     @user = create(:user, :institution_user)
-    @institution = create(:institution)
-    @institution.change_user_id(@user)
+    @institution = create(:institution, users: [@user])
     institutions_params = {
       nome: 'alterado',
     }
@@ -14,8 +13,7 @@ RSpec.describe UserUpdateInstitution, type: :model do
   end
   it 'update institution id' do
     @user = create(:user, :institution_user)
-    @institution = create(:institution)
-    @institution.change_user_id(@user)
+    @institution = create(:institution, users: [@user])
     institutions_params = {
       id: 25,
     }

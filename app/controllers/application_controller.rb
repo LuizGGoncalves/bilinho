@@ -9,34 +9,31 @@ class ApplicationController < ActionController::Base
   end
 
   def check_sing_in
-    if user_signed_in? == false then return render json: { errors: "Realizar login" }, status: 400 end
+    if user_signed_in? == false then return render json: { errors: "Realizar login" }, status: 401 end
     authenticate_user!
-    @user = current_user
-    return render json: { errors: "Nao possui permissao" } unless
-    @user.roles.any? { |role| ["STUDENT", "ADMIN", "INSTITUTION"].include?(role) }
   end
 
   def check_user
-    if user_signed_in? == false then return render json: { errors: "Realizar login" } end
+    if user_signed_in? == false then return render json: { errors: "Realizar login" }, status: 401 end
     authenticate_user!
     @user = current_user
-    return render json: { errors: "Nao possui permissao" } unless
+    return render json: { errors: "Nao possui permisao"}, status: 401  unless
     @user.roles.any? { |role| ["STUDENT", "ADMIN"].include?(role) }
   end
 
   def check_institutions
-    if user_signed_in? == false then return render json: { errors: "Realizar login" } end
+    if user_signed_in? == false then return render json: { errors: "Realizar login" }, status: 401  end
     authenticate_user!
     @user = current_user
-    return render json: { errors: "Nao possui permissao" } unless
+    return render json: { errors: "Nao possui permissao"}, status: 401  unless
     @user.roles.any? { |role| ["INSTITUTION", "ADMIN"].include?(role) }
   end
 
   def check_admin
-    if user_signed_in? == false then return render json: { errors: "Realizar login" } end
+    if user_signed_in? == false then return render json: { errors: "Realizar login"}, status: 401  end
     authenticate_user!
     @user = current_user
-    return render json: { errors: "Nao possui permissao" } unless
+    return render json: { errors: "Nao possui permissao"}, status: 401  unless
     @user.roles.any? { |role| ["ADMIN"].include?(role) }
   end
 end

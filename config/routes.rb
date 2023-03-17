@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get '/bills/:id', to: 'bills#show'
   post '/bills', to: 'bills#create'
   patch '/bills/:id/edit', to: 'bills#update'
-  delete '/bills/:id/delete', to: 'bills#delete'
+  delete '/bills/:id/delete', to: 'bills#destroy'
 
   get '/user/bills', to: 'bills#show_user_bill'
   get '/user/registrations', to: 'registrations#user_registrations'

@@ -5,27 +5,27 @@ class InstitutionsController < ApplicationController
   before_action :check_admin, only: [:destroy, :create, :edit, :update]
 
   def link_user_to_institutions
-    response = UserLinkInstitution.call(current_user, params[:id])
-    render json: response[:body], status: response[:status]
+    begin
+      inst = Institution.find_by(id: params[:id])
+      inst.add_user(current_user)
+      render json: "Sucess #{current_user.id} linked to Institution #{inst.nome}", status: response[:status]
+    rescue
+      render json: "Fail" , status: 400
+    end
   end
 
   def self_info_update
-    response = UserUpdateInstitution.call(current_user)
+    response = UserUpdateInstitution.call(current_user,institution_params )
     render json: response[:body], status: response[:status]
   end
 
   def index
     @institutions = Institution.all
-    print current_user.name
     render json: @institutions
   end
 
   def show
     render json: @institution
-  end
-
-  def new
-    @institution = Institution.new
   end
 
   def create
@@ -37,20 +37,19 @@ class InstitutionsController < ApplicationController
     end
   end
 
-  def edit; end
-
   def update
     if @institution.update(institution_params)
-      render json: @institution, status: 202
+      render json: @institution, status: 200
     else
       render json: @institution.errors, status: 400
     end
   end
 
   def destroy
-    if @institution.destroy
-      render json: @institution, status: 202
-    else
+    begin
+      @institution.destroy
+      render json: @institution, status: 200
+    rescue
       render json: { errors: 'nao foi possivel deletar a instituiçao' }, status: 400
     end
   end

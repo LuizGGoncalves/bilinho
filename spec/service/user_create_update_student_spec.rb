@@ -37,8 +37,8 @@ RSpec.describe UserCreateUpdateStudent, type: :model do
 
   it 'update student values' do
     user = create(:user)
-    student = create(:student)
-    student.change_user_id(user)
+    student = create(:student, user: user)
+    student_cpf = student.cpf
     params = {
       nome: 'testeUpdate',
       data_nascimento: '1981-11-15',
@@ -46,7 +46,7 @@ RSpec.describe UserCreateUpdateStudent, type: :model do
     }
     response = UserCreateUpdateStudent.call(user, params)
     expect(User.find(user.id).student.nome).to eq('testeUpdate')
-    expect(User.find(user.id).student.cpf).to eq('20548269017')
+    expect(User.find(user.id).student.cpf).to eq(student_cpf)
     expect(User.find(user.id).student.data_nascimento).to eq(Date.parse('1981-11-15'))
     expect(User.find(user.id).student.telefone).to eq(11_111_111)
     expect(User.find(user.id).student.genero).to eq('f')
@@ -56,8 +56,7 @@ RSpec.describe UserCreateUpdateStudent, type: :model do
 
   it 'update student whit invalid value' do
     user = create(:user)
-    student = create(:student)
-    student.change_user_id(user)
+    student = create(:student, user: user)
     params = {
       nome: 5549841654,
       genero: 'passaro',

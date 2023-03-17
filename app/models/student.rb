@@ -1,7 +1,8 @@
 class Student < ApplicationRecord
   require "cpf_cnpj"
   has_many :registrations, dependent: :delete_all
-  belongs_to :user
+  has_one :student_association, as: :associationable, class_name: "Association"
+  has_one :user, through: :student_association, source_type: 'User'
 
   validates :nome, presence: true, uniqueness: { message: "Nome Já Utilizado" }
   validates :cpf, presence: true, uniqueness: { message: "Cpf Já Utilizado" }
@@ -14,12 +15,12 @@ class Student < ApplicationRecord
 
   def user_has_institution
     errors.add(:user_id, "Usuario já foi atribuido a uma universidade") unless
-     User.find(user_id).institution == nil
+     self.user.institution == nil
   end
 
-  def change_user_id(user)
-    @user = user
-    update!(user_id: @user.id)
-    @user.update!(user_type: "Student")
+  def change_user(new_user)
+    self.student_association.destroy unless self.student_association == nil
+    self.user = new_user
+    self.save!
   end
 end

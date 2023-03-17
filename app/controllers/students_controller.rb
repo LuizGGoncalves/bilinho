@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:register_update_student_info]
-  before_action :check_admin, only: [:destroy, :index, :show, :create, :update]
+  before_action :check_admin, only: [:set_student, :destroy, :index, :show, :create, :update]
 
   def register_update_student_info
     response = UserCreateUpdateStudent.call(current_user, student_params)
@@ -17,10 +17,6 @@ class StudentsController < ApplicationController
     render json: @student
   end
 
-  def new
-    @student = Student.new
-  end
-
   def create
     @student = Student.new(student_params)
     if @student.save
@@ -29,8 +25,6 @@ class StudentsController < ApplicationController
       render json: @student.errors, status: 400
     end
   end
-
-  def edit; end
 
   def update
     if @student.update(student_params)
@@ -41,9 +35,10 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    if @student.destroy
+    begin
+      @student.destroy
       render json: @student, status: 202
-    else
+    rescue
       render json: { errors: 'nao foi possivel deletar o estudante' }, status: 400
     end
   end
@@ -51,7 +46,8 @@ class StudentsController < ApplicationController
   private
 
   def set_student
-    @student = Student.find(params[:id])
+    @student = Student.find_by(id: params[:id])
+    render json: { errors: 'Target not found'}, status: 400 if @student.nil?
   end
 
   def student_params
