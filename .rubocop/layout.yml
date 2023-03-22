@@ -293,26 +293,6 @@ Layout/LineLength:
 
 Layout/SpaceBeforeBrackets:
   Enabled: true
-  Exclude:
-    - app/models/university.rb
-    - config/initializers/session_store.rb
-    - rails_admin/models/admin_user.rb
-    - rails_admin/models/affiliated_partner.rb
-    - rails_admin/models/base_user.rb
-    - rails_admin/models/bo_resolver.rb
-    - rails_admin/models/campus.rb
-    - rails_admin/models/coupon.rb
-    - rails_admin/models/course.rb
-    - rails_admin/models/email_export.rb
-    - rails_admin/models/interest.rb
-    - rails_admin/models/offer.rb
-    - rails_admin/models/offer_import_event.rb
-    - rails_admin/models/refund_operation.rb
-    - rails_admin/models/refund_request.rb
-    - rails_admin/models/restock_seat.rb
-    - rails_admin/models/sheet.rb
-    - rails_admin/models/sms_export.rb
-    - rails_admin/models/university.rb
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true

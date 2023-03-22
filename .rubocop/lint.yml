@@ -226,8 +226,6 @@ Lint/Void:
 Lint/AmbiguousAssignment:
   Enabled: true
 
-# Lint/DeprecatedConstants:
-#   Enabled: true
 
 Lint/DuplicateRegexpCharacterClassElement:
   Enabled: true
@@ -238,29 +236,11 @@ Lint/EmptyBlock:
 Lint/EmptyClass:
   Enabled: true
 
-# Lint/LambdaWithoutLiteralBlock:
-#   Enabled: true
-
 Lint/NoReturnInBeginEndBlocks:
   Enabled: true
 
-# Lint/NumberedParameterAssignment:
-#   Enabled: true
-
-# Lint/OrAssignmentToConstant:
-#   Enabled: true
-
-# Lint/RedundantDirGlobSort:
-#   Enabled: true
-
-# Lint/SymbolConversion:
-#   Enabled: true
-
 Lint/ToEnumArguments:
   Enabled: true
-
-# Lint/TripleQuotes:
-#   Enabled: true
 
 Lint/UnexpectedBlockArity:
   Enabled: true

@@ -7,17 +7,9 @@ Style/CollectionCompact:
 Style/DocumentDynamicEvalDefinition:
   Enabled: true
 
-# Style/EndlessMethod:
-#   Enabled: true
-
-# Style/HashConversion:
-#   Enabled: true
-
 Style/HashExcept:
   Enabled: true
 
-# Style/IfWithBooleanLiteralBranches:
-#   Enabled: true
 
 Style/NegatedIfElseCondition:
   Enabled: false
@@ -33,9 +25,6 @@ Style/SwapValues:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-# Style/Documentation:
-#   Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false
